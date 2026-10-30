@@ -1,0 +1,8 @@
+nome: vetorial
+versao: 1
+descricao: Baseline. Só similaridade vetorial, sem rerank.
+recuperacao:
+  modo: vetorial
+  candidatos: 30
+rerank:
+  ativo: false

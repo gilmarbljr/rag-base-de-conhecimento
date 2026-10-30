@@ -1,0 +1,15 @@
+Ata da reunião comercial semanal da Horizonte Veltra São Paulo, realizada em 12/01/2026, às 8h30, na sala de reuniões da loja. Participaram o gerente comercial, os cinco consultores de vendas e a coordenadora de F&I.
+
+O gerente abriu a reunião com o resultado da primeira semana de janeiro: 9 veículos vendidos, contra uma meta mensal de 42 unidades. O ritmo está abaixo do esperado, principalmente no Sport 1.5 Turbo, que tem 18 unidades em estoque, o maior volume da loja.
+
+Para acelerar as vendas do Sport, a equipe deve oferecer test drive a todo cliente que pedir orçamento de sedã e destacar o bônus de troca de R$ 6.000,00 da campanha VLT-0126, válido até 31/01/2026. O gerente lembrou que o bônus só vale com um usado na troca e não acumula com venda direta.
+
+Os consultores relataram reclamações sobre o prazo de entrega do Vento Híbrido Premium, que hoje está em 75 dias para cores metálicas. Ficou definido que o prazo deve ser informado por escrito na proposta e que o consultor deve apresentar o Vento Híbrido de entrada como alternativa, com pronta entrega na cor branca.
+
+A coordenadora de F&I informou que a aprovação de crédito para clientes autônomos está mais lenta, levando em média 3 dias úteis. A orientação é coletar a documentação completa já no primeiro atendimento para evitar retrabalho.
+
+Sobre vendas corporativas, duas locadoras pediram propostas de venda direta para o Urba 1.0 CVT. Ficou decidido que toda proposta de venda direta para locadoras deve passar pelo gerente comercial antes do envio, conforme as regras de venda direta do grupo.
+
+Também foi lembrado que clientes PCD interessados no Vento Híbrido Premium devem ser informados de que essa versão não é elegível à isenção, por ultrapassar o limite de valor, e que o Vento Híbrido de entrada é elegível.
+
+A próxima reunião será em 19/01/2026, no mesmo horário.

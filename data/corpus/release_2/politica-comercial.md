@@ -1,0 +1,50 @@
+# Política Comercial do Grupo Horizonte
+
+Esta política vale para todas as lojas do Grupo Horizonte e complementa as regras de cada montadora e de cada loja. Em caso de dúvida, consulte o gerente comercial da sua loja.
+
+## Preços e validade
+
+Os preços seguem a tabela de preços da montadora vigente na data de **assinatura do pedido**. Reajustes de tabela posteriores à assinatura não alteram o valor de pedidos já assinados.
+
+Propostas e orçamentos não assinados não garantem preço: na assinatura, vale a tabela vigente naquela data.
+
+Pintura metálica, acessórios e serviços opcionais são cobrados à parte, conforme a tabela de cada marca.
+
+## Reserva de veículo
+
+- Sinal de reserva: R$ 1.000,00.
+- A reserva vale por 5 dias úteis.
+- O sinal é devolvido integralmente se o cliente desistir em até 7 dias corridos.
+- Depois desse prazo, o sinal é abatido do valor do veículo ou retido em caso de desistência.
+
+## Formas de pagamento
+
+- À vista, por PIX ou transferência bancária.
+- Financiamento pelos bancos parceiros, sujeito à aprovação de crédito.
+- Cartão de crédito apenas para o sinal de reserva, até R$ 5.000,00.
+- Veículo usado na troca, conforme a avaliação da loja.
+
+## Prazos de entrega
+
+- Veículo em estoque: até 5 dias úteis após a confirmação do pagamento.
+- Veículo sob encomenda: prazo informado pela montadora e registrado no pedido.
+- Vendas PCD e venda direta têm prazos próprios, descritos nos manuais específicos.
+
+## Test drive
+
+- Disponível para maiores de 18 anos com CNH definitiva válida.
+- Agendamento pelo WhatsApp ou pelo telefone da loja.
+- Duração de até 20 minutos, sempre com um consultor no veículo.
+
+## Veículo usado na troca
+
+A avaliação do usado é gratuita e vale por 3 dias corridos. O veículo passa por laudo cautelar antes da confirmação do valor. Bônus de troca oferecidos em campanhas são somados ao valor da avaliação.
+
+## Cancelamento
+
+- Antes do faturamento: devolução do sinal conforme a seção "Reserva de veículo".
+- Depois do faturamento: o cancelamento depende de aprovação da diretoria e está sujeito a multa de 10% do valor do veículo.
+
+## Atendimento e ouvidoria
+
+Reclamações e sugestões: 0800 000 1234 ou atendimento@grupohorizonte.exemplo. O prazo de resposta é de até 5 dias úteis.

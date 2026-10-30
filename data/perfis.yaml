@@ -1,0 +1,32 @@
+# Política de acesso do cenário de demonstração.
+#
+# Cada documento declara, no manifest, os metadados de acesso (visibilidade, marca, loja).
+# A busca aplica o filtro ANTES de qualquer trecho chegar ao LLM:
+#   - nível: o documento é visível se o seu nível for igual ou inferior ao do perfil;
+#   - restrições: para cada campo restrito no perfil, o documento precisa ter o campo vazio
+#     (vale para todos) ou com um dos valores permitidos.
+
+nivel:
+  campo: visibilidade
+  ordem: [publico, vendedor, gerente]
+
+perfis:
+  cliente-recife:
+    descricao: Cliente atendido pela Horizonte Altis Recife
+    nivel: publico
+    restricoes:
+      marca: [altis]
+      loja: [recife]
+
+  vendedor-sao-paulo:
+    descricao: Vendedor da Horizonte Veltra São Paulo
+    nivel: vendedor
+    restricoes:
+      marca: [veltra]
+      loja: [sao-paulo]
+
+  gerente-campinas:
+    descricao: Gerente da Horizonte Seminovos Campinas (seminovos de todas as marcas)
+    nivel: gerente
+    restricoes:
+      loja: [campinas]

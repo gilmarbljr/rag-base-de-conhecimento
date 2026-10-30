@@ -1,0 +1,37 @@
+# {{ loja.nome }}
+
+{% if loja.marca is defined %}
+Concessionária {{ loja.marca }} do {{ grupo.nome }}.
+{% else %}
+Loja de seminovos multimarca do {{ grupo.nome }}.
+{% endif %}
+
+## Endereço e contato
+
+- Endereço: {{ loja.endereco }}
+- Telefone: {{ loja.telefone }}
+- WhatsApp: {{ loja.whatsapp }}
+
+## Horário de funcionamento
+
+- Segunda a sexta: {{ loja.horario_semana }}
+- Sábado: {{ loja.horario_sabado }}
+- Domingos e feriados: fechado
+
+## Test drive
+
+{% if loja_id == "campinas" %}
+Os veículos disponíveis no pátio podem ser testados sem agendamento, mediante apresentação da CNH definitiva válida.
+{% else %}
+Agende o test drive com pelo menos 24 horas de antecedência pelo WhatsApp. Aos sábados, os test drives vão até 12h.
+{% endif %}
+
+## Condições exclusivas da loja
+
+{% if loja_id == "recife" %}
+Na compra de um Altis 0 km com um usado da marca Altis na troca, a loja adiciona {{ loja.bonus_troca_adicional | brl }} ao bônus de troca da campanha vigente da montadora. O adicional complementa a campanha e só é concedido quando a campanha do mês oferece bônus de troca para o modelo comprado.
+{% elif loja_id == "sao_paulo" %}
+Película de controle solar e lavagem completa inclusas na entrega de qualquer Veltra 0 km comprado na loja.
+{% else %}
+Revisão de 1.000 km gratuita para seminovos comprados na loja.
+{% endif %}

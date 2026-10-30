@@ -1,0 +1,472 @@
+# Fatos canônicos do corpus de demonstração.
+#
+# Os documentos (e, nas próximas fases, o golden set) são gerados a partir deste arquivo
+# por scripts/generate_corpus.py. Para mudar uma regra, altere o fato aqui e gere de novo:
+# documento e resposta esperada mudam juntos.
+#
+# Grupo, lojas, marcas, modelos, preços, programas e regras são FICTÍCIOS.
+# Regras de PCD, venda direta e programas governamentais apenas se inspiram nas reais
+# e não devem ser usadas como referência.
+#
+# Estrutura:
+#   base       -> fatos válidos em todas as releases
+#   releases   -> o que muda em cada release (mesclado sobre a base, inclusive dentro de mapas)
+#   documentos -> registro das fontes: cada documento, seus metadados e em quais releases existe
+#
+# Em cada documento:
+#   contexto    -> {marca: altis} expõe `marca` = marcas.altis e `marca_id` = "altis" no template
+#   variaveis   -> valores passados diretamente ao template
+#   por_release -> metadados que mudam numa release (ex.: vigência de uma nova versão)
+
+base:
+  grupo:
+    nome: Grupo Horizonte
+    sac_telefone: "0800 000 1234"
+    sac_email: atendimento@grupohorizonte.exemplo
+
+  lojas:
+    recife:
+      nome: Horizonte Altis Recife
+      marca: Altis
+      endereco: Av. das Palmeiras, 1200, Boa Viagem, Recife/PE
+      telefone: "(81) 3000-1200"
+      whatsapp: "(81) 99000-1200"
+      horario_semana: 8h às 18h
+      horario_sabado: 8h às 13h
+      bonus_troca_adicional: 1000
+    sao_paulo:
+      nome: Horizonte Veltra São Paulo
+      marca: Veltra
+      endereco: Av. dos Ipês, 3450, Moema, São Paulo/SP
+      telefone: "(11) 3000-3450"
+      whatsapp: "(11) 99000-3450"
+      horario_semana: 9h às 19h
+      horario_sabado: 9h às 14h
+    campinas:
+      nome: Horizonte Seminovos Campinas
+      endereco: Rod. das Acácias, km 4, Campinas/SP
+      telefone: "(19) 3000-0400"
+      whatsapp: "(19) 99000-0400"
+      horario_semana: 9h às 18h
+      horario_sabado: 9h às 16h
+
+  marcas:
+    altis:
+      nome: Altis
+      pintura_metalica: 2200
+      garantia_anos: 3
+      pcd_desconto_pct: 5
+      pcd_prazo_entrega_dias: 45
+      vd_pedido_minimo: 2
+      vd_frota_minima: 5
+      pcd_documentos_adicionais: []
+      # Versões indexadas pelo código, para que uma release possa alterar só o preço de uma delas.
+      versoes:
+        NX-10 MT: {modelo: Nexa, descricao: Nexa 1.0 Manual, categoria: Hatch compacto, motor: 1.0 aspirado flex, cambio: Manual de 5 marchas, preco: 89990, vd_desconto_pct: 8}
+        NX-T AT: {modelo: Nexa, descricao: Nexa 1.0 Turbo Automático, categoria: Hatch compacto, motor: 1.0 turbo flex, cambio: Automático de 6 marchas, preco: 112990, vd_desconto_pct: 10}
+        TR-T AT: {modelo: Trilha, descricao: Trilha 1.3 Turbo Automático, categoria: SUV compacto, motor: 1.3 turbo flex, cambio: Automático de 6 marchas, preco: 149990, vd_desconto_pct: 12}
+        TR-T AT TOP: {modelo: Trilha, descricao: Trilha 1.3 Turbo Top, categoria: SUV compacto, motor: 1.3 turbo flex, cambio: Automático de 6 marchas, preco: 172490, vd_desconto_pct: 11}
+        FZ-D 4X4: {modelo: Forza, descricao: Forza 2.0 Diesel 4x4, categoria: Picape média, motor: 2.0 turbodiesel, cambio: Automático de 8 marchas, preco: 239900, vd_desconto_pct: 6}
+    veltra:
+      nome: Veltra
+      pintura_metalica: 2500
+      garantia_anos: 5
+      pcd_desconto_pct: 4
+      pcd_prazo_entrega_dias: 60
+      vd_pedido_minimo: 1
+      vd_frota_minima: null
+      pcd_documentos_adicionais: []
+      versoes:
+        UR-10 MT: {modelo: Urba, descricao: Urba 1.0 Manual, categoria: Hatch compacto, motor: 1.0 aspirado flex, cambio: Manual de 5 marchas, preco: 84490, vd_desconto_pct: 9}
+        UR-10 CVT: {modelo: Urba, descricao: Urba 1.0 CVT, categoria: Hatch compacto, motor: 1.0 aspirado flex, cambio: Automático CVT, preco: 98990, vd_desconto_pct: 9}
+        SP-15T AT: {modelo: Sport, descricao: Sport 1.5 Turbo, categoria: Sedã médio, motor: 1.5 turbo flex, cambio: Automático de 7 marchas, preco: 154900, vd_desconto_pct: 11}
+        VT-HEV: {modelo: Vento, descricao: Vento Híbrido, categoria: SUV médio, motor: 2.0 híbrido, cambio: Automático e-CVT, preco: 198500, vd_desconto_pct: 7}
+        VT-HEV PRM: {modelo: Vento, descricao: Vento Híbrido Premium, categoria: SUV médio, motor: 2.0 híbrido, cambio: Automático e-CVT, preco: 226900, vd_desconto_pct: 5}
+
+  pcd:
+    teto_valor: 200000
+    prazo_revenda_meses: 24
+    validade_autorizacao_dias: 180
+    max_condutores: 3
+    documentos:
+      - Documento de identidade com foto e CPF do beneficiário
+      - Comprovante de residência do beneficiário
+      - Laudo de avaliação emitido por serviço de saúde credenciado
+      - Autorização de isenção emitida pelo órgão competente, dentro da validade
+      - CNH do beneficiário, se ele for o condutor, ou CNH de cada condutor autorizado
+      - Termo de representação legal, quando o beneficiário for menor de idade ou interditado
+
+  venda_direta:
+    cnpj_tempo_minimo_meses: 12
+    prazo_revenda_meses: 12
+    prazo_entrega: 30 a 60 dias após a aprovação do pedido pela montadora
+    documentos:
+      - Cartão CNPJ atualizado
+      - Contrato social e última alteração contratual
+      - Documento de identidade do representante legal
+      - Procuração, quando o pedido for assinado por procurador
+      - Declaração de frota (somente Altis, quando a empresa usar a regra de frota mínima)
+
+  rota_limpa:
+    nome: Programa Rota Limpa
+    inicio: 2026-01-01
+    fim: 2026-03-31
+    bonus: 5000
+    idade_minima_veiculo_anos: 15
+    modelos: [NX-10 MT, NX-T AT, UR-10 MT, UR-10 CVT, VT-HEV]
+
+  # Combinações permitidas entre condições comerciais. Matriz simétrica.
+  cumulatividade:
+    condicoes: [Campanha do mês, Bônus de troca, Venda direta, PCD, Programa Rota Limpa]
+    nao_acumula:
+      - [Campanha do mês, Venda direta]
+      - [Bônus de troca, Venda direta]
+      - [Bônus de troca, Programa Rota Limpa]
+      - [Venda direta, PCD]
+      - [Venda direta, Programa Rota Limpa]
+      - [PCD, Programa Rota Limpa]
+
+  alcadas:
+    novos:
+      vendedor_pct: 2
+      gerente_pct: 5
+    seminovos:
+      - {faixa: Até 3 anos, vendedor_pct: 1.5, gerente_pct: 4}
+      - {faixa: De 3 a 5 anos, vendedor_pct: 2, gerente_pct: 6}
+      - {faixa: Acima de 5 anos, vendedor_pct: 3, gerente_pct: 8}
+    margem_minima_novos_pct: 3
+    margem_minima_seminovos_pct: 8
+
+  seminovos:
+    itens_inspecao: 110
+    garantia:
+      - {idade: Até 3 anos, km: Até 60.000 km, meses: 12}
+      - {idade: Até 5 anos, km: Até 100.000 km, meses: 6}
+      - {idade: Acima de 5 anos, km: Acima de 100.000 km, meses: 3}
+    satisfacao_dias: 7
+    satisfacao_km: 300
+    entrada_minima_pct: 20
+    prazo_maximo_meses: 60
+
+  avaliacao:
+    percentuais:
+      - {idade: Até 3 anos, pct: 92}
+      - {idade: De 4 a 6 anos, pct: 85}
+      - {idade: De 7 a 10 anos, pct: 75}
+    km_referencia_ano: 15000
+    validade_dias: 3
+
+  campanhas:
+    altis_2026_01:
+      codigo: CMP-0126
+      mes: janeiro de 2026
+      inicio: 2026-01-01
+      fim: 2026-01-31
+      faturamento_ate: 2026-02-10
+      taxa_zero:
+        parcelas: 24
+        entrada_minima_pct: 50
+        versoes: [NX-T AT, TR-T AT, TR-T AT TOP]
+      bonus_troca:
+        valor: 4000
+        modelo: Trilha
+    altis_2026_02:
+      codigo: CMP-0226
+      mes: fevereiro de 2026
+      inicio: 2026-02-01
+      fim: 2026-02-28
+      faturamento_ate: 2026-03-10
+      desconto_a_vista:
+        valor: 4000
+        versao: NX-10 MT
+      bonus_troca:
+        valor: 5000
+        modelo: Trilha
+        # Restrição da circular que contraria a matriz de cumulatividade (PCD + bônus de troca).
+        nao_acumula_com: desconto PCD
+    veltra_2026_01:
+      codigo: VLT-0126
+      mes: janeiro de 2026
+      inicio: 2026-01-01
+      fim: 2026-01-31
+      ipva_pago:
+        versao: UR-10 CVT
+      bonus_troca:
+        valor: 6000
+        modelo: Sport
+      revisoes_inclusas:
+        modelo: Vento
+        revisoes: "12 e 24 meses"
+
+releases:
+  1:
+    data_referencia: 2026-01-15
+  2:
+    # Virada de fevereiro: reajuste da tabela Altis e nova exigência no PCD Veltra.
+    data_referencia: 2026-02-10
+    marcas:
+      altis:
+        versoes:
+          NX-10 MT: {preco: 91990}
+          NX-T AT: {preco: 115490}
+          TR-T AT: {preco: 153490}
+          TR-T AT TOP: {preco: 176490}
+          FZ-D 4X4: {preco: 244900}
+      veltra:
+        pcd_documentos_adicionais:
+          - Laudo de avaliação emitido há no máximo 12 meses na data do pedido
+  3:
+    # Março: o Programa Rota Limpa é encerrado e uma cópia da circular de fevereiro aparece.
+    data_referencia: 2026-03-10
+
+documentos:
+  - id: politica-comercial
+    titulo: Política Comercial do Grupo Horizonte
+    tipo: politica
+    template: politica-comercial.md.j2
+    formato_final: pdf
+    escopo: grupo
+    acesso: {visibilidade: publico}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Diretoria Comercial
+    releases: [1, 2, 3]
+
+  - id: pcd-altis
+    titulo: Manual de Vendas PCD Altis
+    tipo: manual
+    template: pcd.md.j2
+    contexto: {marca: altis}
+    formato_final: pdf
+    escopo: marca
+    acesso: {visibilidade: publico, marca: altis}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-06-30
+    responsavel: Altis do Brasil (montadora)
+    releases: [1, 2, 3]
+
+  - id: pcd-veltra
+    titulo: Manual de Vendas PCD Veltra
+    tipo: manual
+    template: pcd.md.j2
+    contexto: {marca: veltra}
+    formato_final: pdf
+    escopo: marca
+    acesso: {visibilidade: publico, marca: veltra}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-06-30
+    responsavel: Veltra Motors (montadora)
+    releases: [1, 2, 3]
+    por_release:
+      2: {vigencia: {inicio: 2026-02-01}}
+
+  - id: venda-direta
+    titulo: Regras de Venda Direta para CNPJ
+    tipo: manual
+    template: venda-direta.md.j2
+    formato_final: md
+    escopo: grupo
+    acesso: {visibilidade: vendedor}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-06-30
+    responsavel: Gerência de Vendas Corporativas
+    releases: [1, 2, 3]
+
+  - id: programa-rota-limpa
+    titulo: Programa Rota Limpa
+    tipo: programa
+    template: programa-rota-limpa.md.j2
+    formato_final: md
+    escopo: grupo
+    acesso: {visibilidade: publico}
+    vigencia: {inicio: 2026-01-01, fim: 2026-03-31}
+    responsavel: Diretoria Comercial
+    releases: [1, 2]
+
+  - id: tabela-precos-altis
+    titulo: Tabela de Preços Altis
+    tipo: tabela-precos
+    template: tabela-precos.md.j2
+    contexto: {marca: altis}
+    formato_final: pdf
+    escopo: marca
+    acesso: {visibilidade: publico, marca: altis}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-01-31
+    responsavel: Altis do Brasil (montadora)
+    releases: [1, 2, 3]
+    por_release:
+      2: {vigencia: {inicio: 2026-02-01}, revisar_ate: 2026-02-28}
+
+  - id: tabela-precos-veltra
+    titulo: Tabela de Preços Veltra
+    tipo: tabela-precos
+    template: tabela-precos.md.j2
+    contexto: {marca: veltra}
+    formato_final: pdf
+    escopo: marca
+    acesso: {visibilidade: publico, marca: veltra}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-02-28
+    responsavel: Veltra Motors (montadora)
+    releases: [1, 2, 3]
+
+  - id: circular-altis-2026-01
+    titulo: Circular de Campanhas Altis CMP-0126
+    tipo: circular
+    template: circular-altis.md.j2
+    contexto: {campanha: altis_2026_01}
+    formato_final: eml
+    escopo: marca
+    acesso: {visibilidade: publico, marca: altis}
+    vigencia: {inicio: 2026-01-01, fim: 2026-01-31}
+    responsavel: Altis do Brasil (montadora)
+    releases: [1, 2, 3]
+
+  - id: circular-altis-2026-02
+    titulo: Circular de Campanhas Altis CMP-0226
+    tipo: circular
+    template: circular-altis.md.j2
+    contexto: {campanha: altis_2026_02}
+    formato_final: eml
+    escopo: marca
+    acesso: {visibilidade: publico, marca: altis}
+    vigencia: {inicio: 2026-02-01, fim: 2026-02-28}
+    responsavel: Altis do Brasil (montadora)
+    releases: [2, 3]
+
+  # Mesma circular, encaminhada em PDF por outra área: quase-duplicata para o relatório de saúde.
+  - id: circular-altis-2026-02-encaminhada
+    titulo: Circular de Campanhas Altis CMP-0226
+    tipo: circular
+    template: circular-altis.md.j2
+    contexto: {campanha: altis_2026_02}
+    variaveis: {encaminhada_por: Gerência Comercial da Horizonte Altis Recife}
+    formato_final: pdf
+    escopo: marca
+    acesso: {visibilidade: publico, marca: altis}
+    vigencia: {inicio: 2026-02-01, fim: 2026-02-28}
+    responsavel: Horizonte Altis Recife
+    releases: [3]
+
+  - id: circular-veltra-2026-01
+    titulo: Circular de Campanhas Veltra VLT-0126
+    tipo: circular
+    template: circular-veltra.md.j2
+    contexto: {campanha: veltra_2026_01}
+    formato_final: eml
+    escopo: marca
+    acesso: {visibilidade: publico, marca: veltra}
+    vigencia: {inicio: 2026-01-01, fim: 2026-01-31}
+    responsavel: Veltra Motors (montadora)
+    releases: [1, 2, 3]
+
+  - id: matriz-cumulatividade
+    titulo: Matriz de Cumulatividade de Condições Comerciais
+    tipo: politica
+    template: matriz-cumulatividade.md.j2
+    formato_final: md
+    escopo: grupo
+    acesso: {visibilidade: vendedor}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-06-30
+    responsavel: Diretoria Comercial
+    releases: [1, 2, 3]
+
+  - id: seminovos-garantia
+    titulo: Política de Seminovos e Garantia
+    tipo: politica
+    template: seminovos-garantia.md.j2
+    formato_final: md
+    escopo: loja
+    acesso: {visibilidade: publico, loja: campinas}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Gerência de Seminovos
+    releases: [1, 2, 3]
+
+  - id: avaliacao-usados
+    titulo: Critérios de Avaliação de Veículos Usados
+    tipo: manual
+    template: avaliacao-usados.md.j2
+    formato_final: md
+    escopo: grupo
+    acesso: {visibilidade: vendedor}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Gerência de Seminovos
+    releases: [1, 2, 3]
+
+  - id: alcadas-desconto
+    titulo: Alçadas de Desconto e Margem Mínima
+    tipo: politica
+    template: alcadas-desconto.md.j2
+    formato_final: pdf
+    escopo: grupo
+    acesso: {visibilidade: gerente}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Diretoria Comercial
+    releases: [1, 2, 3]
+
+  - id: loja-recife
+    titulo: Horizonte Altis Recife
+    tipo: informacoes-loja
+    template: loja.md.j2
+    contexto: {loja: recife}
+    formato_final: md
+    escopo: loja
+    acesso: {visibilidade: publico, marca: altis, loja: recife}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Gerência da loja
+    releases: [1, 2, 3]
+
+  - id: loja-sao-paulo
+    titulo: Horizonte Veltra São Paulo
+    tipo: informacoes-loja
+    template: loja.md.j2
+    contexto: {loja: sao_paulo}
+    formato_final: md
+    escopo: loja
+    acesso: {visibilidade: publico, marca: veltra, loja: sao-paulo}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Gerência da loja
+    releases: [1, 2, 3]
+
+  - id: loja-campinas
+    titulo: Horizonte Seminovos Campinas
+    tipo: informacoes-loja
+    template: loja.md.j2
+    contexto: {loja: campinas}
+    formato_final: md
+    escopo: loja
+    acesso: {visibilidade: publico, loja: campinas}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Gerência da loja
+    releases: [1, 2, 3]
+
+  - id: ata-reuniao-sao-paulo-2026-01-12
+    titulo: Ata da Reunião Comercial de 12/01/2026
+    tipo: ata
+    template: ata-reuniao-sao-paulo.md.j2
+    formato_final: txt
+    escopo: loja
+    acesso: {visibilidade: vendedor, marca: veltra, loja: sao-paulo}
+    vigencia: {inicio: 2026-01-12}
+    responsavel: Gerência comercial da loja
+    releases: [1, 2, 3]
+
+  - id: glossario
+    titulo: Glossário de Termos Comerciais
+    tipo: glossario
+    template: glossario.md.j2
+    formato_final: md
+    escopo: grupo
+    acesso: {visibilidade: publico}
+    vigencia: {inicio: 2026-01-01}
+    revisar_ate: 2026-12-31
+    responsavel: Diretoria Comercial
+    releases: [1, 2, 3]

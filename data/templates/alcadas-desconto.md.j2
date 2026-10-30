@@ -1,0 +1,32 @@
+# {{ doc.titulo }}
+
+**Documento confidencial, de uso exclusivo dos gerentes. Não compartilhar com clientes nem com a equipe de vendas.**
+
+## Veículos novos
+
+| Cargo | Desconto máximo sobre o preço público |
+|---|---|
+| Vendedor | {{ alcadas.novos.vendedor_pct | pct }} |
+| Gerente comercial | {{ alcadas.novos.gerente_pct | pct }} |
+| Diretoria | Acima de {{ alcadas.novos.gerente_pct | pct }}, com justificativa |
+
+## Seminovos
+
+| Idade do veículo | Vendedor | Gerente comercial |
+|---|---|---|
+{% for a in alcadas.seminovos %}
+| {{ a.faixa }} | {{ a.vendedor_pct | pct }} | {{ a.gerente_pct | pct }} |
+{% endfor %}
+
+Descontos acima da alçada do gerente precisam de aprovação da diretoria.
+
+## Margem mínima
+
+- Veículos novos: margem mínima de {{ alcadas.margem_minima_novos_pct | pct }} sobre o custo de aquisição.
+- Seminovos: margem mínima de {{ alcadas.margem_minima_seminovos_pct | pct }} sobre o custo de aquisição mais a preparação.
+
+Nenhuma alçada autoriza venda abaixo da margem mínima sem aprovação da diretoria.
+
+## Registro de aprovações
+
+Todo desconto acima da alçada do vendedor deve ser aprovado no sistema, com justificativa, antes da assinatura do pedido.

@@ -1,0 +1,3 @@
+# O corpus e o golden set são comparados byte a byte com a saída do gerador (que usa LF).
+data/** text eol=lf
+* text=auto

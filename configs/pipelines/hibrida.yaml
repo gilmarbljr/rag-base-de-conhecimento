@@ -1,0 +1,9 @@
+nome: hibrida
+versao: 1
+descricao: Vetorial + full-text (Postgres, português), fundidos por Reciprocal Rank Fusion.
+recuperacao:
+  modo: hibrida
+  candidatos: 30
+  rrf_k: 60
+rerank:
+  ativo: false

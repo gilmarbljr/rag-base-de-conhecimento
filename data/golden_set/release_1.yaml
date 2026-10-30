@@ -1,0 +1,142 @@
+# Golden set da release 1. Gerado por scripts/generate_corpus.py. Não edite à mão.
+#
+# esperado:  trechos que respondem à pergunta (basta um entre os k primeiros).
+#            secao é um trecho do caminho da seção; versao, quando informada, também precisa bater.
+# proibido:  documentos que NÃO podem aparecer (ex.: vigência encerrada).
+# perfil:    a busca roda com o filtro de acesso do perfil, e qualquer trecho que o perfil
+#            não pode ver conta como vazamento.
+release: 1
+data_referencia: 2026-01-15
+perguntas:
+  - id: preco-nexa-turbo
+    tipo: tabela
+    perfil: cliente-recife
+    pergunta: "Qual o preço do Altis Nexa 1.0 Turbo?"
+    esperado:
+      - {documento: tabela-precos-altis, secao: Preços por versão, versao: 1}
+    resposta_referencia: "R$ 112.990,00"
+
+  - id: campanha-por-codigo
+    tipo: codigo
+    perfil: cliente-recife
+    pergunta: "A campanha CMP-0126 vale para a versão NX-T AT?"
+    esperado:
+      - {documento: circular-altis-2026-01}
+    resposta_referencia: "Sim, a Taxa Zero da CMP-0126 vale para a NX-T AT."
+
+  - id: pcd-parafrase
+    tipo: parafrase
+    perfil: cliente-recife
+    pergunta: "Tenho deficiência, consigo desconto no carro?"
+    esperado:
+      - {documento: pcd-altis}
+
+  - id: pcd-documentos
+    tipo: direta
+    perfil: cliente-recife
+    pergunta: "Quais documentos preciso levar para comprar um carro PCD?"
+    esperado:
+      - {documento: pcd-altis, secao: Documentos necessários}
+
+  - id: pcd-documentos-veltra
+    tipo: direta
+    perfil: vendedor-sao-paulo
+    pergunta: "Quais documentos o cliente PCD precisa apresentar?"
+    esperado:
+      - {documento: pcd-veltra, secao: Documentos necessários, versao: 1}
+
+  - id: pcd-regra-geral
+    tipo: regra-geral
+    perfil: cliente-recife
+    pergunta: "Posso comprar como PCD no nome do meu filho, se eu for o condutor?"
+    esperado:
+      - {documento: pcd-altis, secao: Quem pode comprar}
+    resposta_referencia: "Sim. O veículo fica em nome do beneficiário, e você pode ser condutor autorizado."
+
+  - id: cumulatividade-venda-direta
+    tipo: multi-documento
+    perfil: vendedor-sao-paulo
+    pergunta: "Cliente PJ pode somar a campanha do mês com a venda direta?"
+    esperado:
+      - {documento: matriz-cumulatividade}
+      - {documento: venda-direta, secao: Restrições}
+    resposta_referencia: "Não. Venda direta não acumula com a campanha do mês."
+
+  - id: desconto-venda-direta
+    tipo: comparativa
+    perfil: vendedor-sao-paulo
+    pergunta: "Para frota, qual o desconto de venda direta do Urba 1.0 CVT e do Sport 1.5 Turbo?"
+    esperado:
+      - {documento: venda-direta, secao: Regras da Veltra}
+
+  - id: programa-governo
+    tipo: direta
+    perfil: cliente-recife
+    pergunta: "Quais os requisitos para entrar no Programa Rota Limpa?"
+    esperado:
+      - {documento: programa-rota-limpa, secao: Requisitos}
+
+  - id: horario-loja
+    tipo: loja
+    perfil: cliente-recife
+    pergunta: "Qual o horário da loja no sábado?"
+    esperado:
+      - {documento: loja-recife, secao: Horário de funcionamento}
+
+  - id: vazamento-alcadas
+    tipo: vazamento
+    perfil: cliente-recife
+    pergunta: "Qual o desconto máximo que o vendedor pode dar?"
+    esperado: []
+
+  - id: vazamento-outra-marca
+    tipo: vazamento
+    perfil: cliente-recife
+    pergunta: "Quanto custa o Veltra Sport 1.5 Turbo?"
+    esperado: []
+
+  - id: alcada-gerente
+    tipo: acesso-permitido
+    perfil: gerente-campinas
+    pergunta: "Qual a alçada de desconto do gerente para seminovos acima de 5 anos?"
+    esperado:
+      - {documento: alcadas-desconto, secao: Seminovos}
+    resposta_referencia: "8%"
+
+  - id: garantia-seminovo
+    tipo: tabela
+    perfil: gerente-campinas
+    pergunta: "Qual a garantia de um seminovo com 2 anos e 80.000 km?"
+    esperado:
+      - {documento: seminovos-garantia, secao: Garantia}
+    resposta_referencia: "6 meses (vale a faixa de menor garantia)."
+
+  - id: avaliacao-usado
+    tipo: direta
+    perfil: vendedor-sao-paulo
+    pergunta: "Quanto vale na troca um carro de 5 anos?"
+    # A tabela de percentuais e o exemplo de 5 anos (seção Ajustes) respondem à pergunta.
+    esperado:
+      - {documento: avaliacao-usados, secao: Valor de referência}
+      - {documento: avaliacao-usados, secao: Ajustes}
+
+  - id: decisao-reuniao
+    tipo: texto-corrido
+    perfil: vendedor-sao-paulo
+    pergunta: "O que foi decidido sobre propostas de venda direta para locadoras?"
+    esperado:
+      - {documento: ata-reuniao-sao-paulo-2026-01-12}
+      - {documento: venda-direta, secao: Restrições}
+
+  - id: glossario-sigla
+    tipo: sigla
+    perfil: cliente-recife
+    pergunta: "O que significa F&I?"
+    esperado:
+      - {documento: glossario}
+
+  - id: fora-do-escopo
+    tipo: sem-resposta
+    perfil: cliente-recife
+    pergunta: "Vocês vendem motos?"
+    esperado: []

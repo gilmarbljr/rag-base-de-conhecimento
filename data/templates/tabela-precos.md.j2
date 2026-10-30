@@ -1,0 +1,26 @@
+# {{ doc.titulo }}
+
+Preços públicos sugeridos para veículos {{ marca.nome }} 0 km, válidos a partir de {{ doc.vigencia.inicio | data }} até a publicação de uma nova tabela.
+
+## Preços por versão
+
+| Código | Modelo | Versão | Categoria | Preço público |
+|---|---|---|---|---|
+{% for v in marca.versoes %}
+| {{ v.codigo }} | {{ marca.nome }} {{ v.modelo }} | {{ v.descricao }} | {{ v.categoria }} | {{ v.preco | brl }} |
+{% endfor %}
+
+## Especificações
+
+| Código | Motor | Câmbio |
+|---|---|---|
+{% for v in marca.versoes %}
+| {{ v.codigo }} | {{ v.motor }} | {{ v.cambio }} |
+{% endfor %}
+
+## Observações
+
+- Pintura metálica: acréscimo de {{ marca.pintura_metalica | brl }}.
+- Preços com frete incluso. IPVA e emplacamento não estão incluídos.
+- Garantia de fábrica de {{ marca.garantia_anos }} anos.
+- Vale a tabela vigente na data de assinatura do pedido, conforme a Política Comercial do {{ grupo.nome }}.

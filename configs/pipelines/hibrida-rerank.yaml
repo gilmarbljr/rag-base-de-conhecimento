@@ -1,0 +1,14 @@
+nome: hibrida-rerank
+versao: 1
+descricao: >
+  Busca híbrida seguida de reranking com um cross-encoder multilíngue pequeno (118M parâmetros,
+  treinado no mMARCO, que inclui português). Escolhido para CPU: na avaliação, teve qualidade
+  igual à do bge-reranker-v2-m3 com latência cerca de 14 vezes menor (ver ADR-004).
+recuperacao:
+  modo: hibrida
+  candidatos: 30
+  rrf_k: 60
+rerank:
+  ativo: true
+  candidatos: 15
+  modelo: cross-encoder/mmarco-mMiniLMv2-L12-H384-v1

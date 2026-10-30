@@ -1,0 +1,42 @@
+# {{ doc.titulo }}
+
+Uso interno da equipe de vendas. Venda direta é a venda faturada diretamente pela montadora para pessoa jurídica, com desconto sobre o preço público. A concessionária intermedia o pedido e faz a entrega.
+
+## Elegibilidade geral
+
+- CNPJ ativo há pelo menos {{ venda_direta.cnpj_tempo_minimo_meses }} meses e em situação regular.
+- O veículo deve ser usado na atividade da empresa.
+- Pessoas físicas não podem comprar por venda direta.
+
+## Regras da Altis
+
+Pedido mínimo de {{ marcas.altis.vd_pedido_minimo }} unidades **ou** frota própria registrada com pelo menos {{ marcas.altis.vd_frota_minima }} veículos. O desconto incide sobre o preço público da tabela Altis vigente.
+
+| Código | Versão | Desconto VD |
+|---|---|---|
+{% for v in marcas.altis.versoes %}
+| {{ v.codigo }} | Altis {{ v.descricao }} | {{ v.vd_desconto_pct | pct }} |
+{% endfor %}
+
+## Regras da Veltra
+
+Pedido mínimo de {{ marcas.veltra.vd_pedido_minimo }} unidade, sem exigência de frota. O desconto incide sobre o preço público da tabela Veltra vigente.
+
+| Código | Versão | Desconto VD |
+|---|---|---|
+{% for v in marcas.veltra.versoes %}
+| {{ v.codigo }} | Veltra {{ v.descricao }} | {{ v.vd_desconto_pct | pct }} |
+{% endfor %}
+
+## Documentos exigidos
+
+{% for item in venda_direta.documentos %}
+- {{ item }}
+{% endfor %}
+
+## Restrições
+
+- O veículo não pode ser revendido antes de {{ venda_direta.prazo_revenda_meses }} meses do faturamento.
+- Prazo de entrega: {{ venda_direta.prazo_entrega }}.
+- Venda direta não acumula com campanha do mês, bônus de troca, desconto PCD nem com o {{ rota_limpa.nome }}. Consulte a Matriz de Cumulatividade.
+- Propostas para locadoras devem ser aprovadas pelo gerente comercial antes do envio ao cliente.

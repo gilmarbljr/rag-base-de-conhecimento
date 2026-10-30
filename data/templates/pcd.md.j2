@@ -1,0 +1,52 @@
+# {{ doc.titulo }}
+
+Este manual descreve as regras da {{ marca.nome }} para a venda de veículos novos a pessoas com deficiência (PCD) com isenção de impostos. As condições valem para as concessionárias {{ marca.nome }} do {{ grupo.nome }}.
+
+## Quem pode comprar
+
+O benefício é concedido à pessoa com deficiência (o beneficiário), mesmo que ela não dirija.
+
+- O veículo é sempre registrado e faturado **em nome do beneficiário**.
+- Se o beneficiário não dirige ou é menor de idade, até {{ pcd.max_condutores }} condutores autorizados podem ser indicados para dirigir o veículo.
+- A compra pode ser feita pelo representante legal quando o beneficiário for menor de idade ou interditado.
+
+## Limite de valor
+
+A isenção vale apenas para veículos com preço público de até {{ pcd.teto_valor | brl }}, já considerando opcionais e pintura.
+
+## Versões elegíveis
+
+Além da isenção, a {{ marca.nome }} concede desconto de {{ marca.pcd_desconto_pct | pct }} sobre o preço público das versões elegíveis. Os preços públicos estão na tabela de preços {{ marca.nome }} vigente.
+
+| Código | Versão | Desconto da montadora |
+|---|---|---|
+{% for v in marca.versoes if v.preco <= pcd.teto_valor %}
+| {{ v.codigo }} | {{ marca.nome }} {{ v.descricao }} | {{ marca.pcd_desconto_pct | pct }} |
+{% endfor %}
+
+Não são elegíveis, por ultrapassarem o limite de valor:
+
+{% for v in marca.versoes if v.preco > pcd.teto_valor %}
+- {{ v.codigo }}: {{ marca.nome }} {{ v.descricao }}
+{% endfor %}
+
+## Documentos necessários
+
+{% for item in pcd.documentos + marca.pcd_documentos_adicionais %}
+- {{ item }}
+{% endfor %}
+
+A autorização de isenção vale por {{ pcd.validade_autorizacao_dias }} dias a partir da emissão. O pedido precisa ser assinado dentro desse prazo.
+
+## Prazo de entrega
+
+Veículos PCD são faturados sob encomenda. O prazo de entrega da {{ marca.nome }} é de até {{ marca.pcd_prazo_entrega_dias }} dias após a aprovação da documentação.
+
+## Restrições após a compra
+
+- O veículo não pode ser vendido antes de {{ pcd.prazo_revenda_meses }} meses da compra sem a perda do benefício.
+- Uma nova compra com o benefício só pode ser feita {{ pcd.prazo_revenda_meses }} meses após a anterior.
+
+## Combinação com outras condições
+
+O desconto PCD pode ser combinado com a campanha do mês e com o bônus de troca. Não pode ser combinado com venda direta nem com o {{ rota_limpa.nome }}.

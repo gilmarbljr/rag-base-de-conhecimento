@@ -1,0 +1,233 @@
+# Gerado por scripts/generate_corpus.py a partir de data/facts.yaml. Não edite à mão.
+release: 1
+data_referencia: 2026-01-15
+documentos:
+- id: politica-comercial
+  titulo: Política Comercial do Grupo Horizonte
+  tipo: politica
+  arquivo: politica-comercial.md
+  formato_final: pdf
+  escopo: grupo
+  acesso:
+    visibilidade: publico
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Diretoria Comercial
+- id: pcd-altis
+  titulo: Manual de Vendas PCD Altis
+  tipo: manual
+  arquivo: pcd-altis.md
+  formato_final: pdf
+  escopo: marca
+  acesso:
+    visibilidade: publico
+    marca: altis
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-06-30
+  responsavel: Altis do Brasil (montadora)
+- id: pcd-veltra
+  titulo: Manual de Vendas PCD Veltra
+  tipo: manual
+  arquivo: pcd-veltra.md
+  formato_final: pdf
+  escopo: marca
+  acesso:
+    visibilidade: publico
+    marca: veltra
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-06-30
+  responsavel: Veltra Motors (montadora)
+- id: venda-direta
+  titulo: Regras de Venda Direta para CNPJ
+  tipo: manual
+  arquivo: venda-direta.md
+  formato_final: md
+  escopo: grupo
+  acesso:
+    visibilidade: vendedor
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-06-30
+  responsavel: Gerência de Vendas Corporativas
+- id: programa-rota-limpa
+  titulo: Programa Rota Limpa
+  tipo: programa
+  arquivo: programa-rota-limpa.md
+  formato_final: md
+  escopo: grupo
+  acesso:
+    visibilidade: publico
+  vigencia:
+    inicio: 2026-01-01
+    fim: 2026-03-31
+  responsavel: Diretoria Comercial
+- id: tabela-precos-altis
+  titulo: Tabela de Preços Altis
+  tipo: tabela-precos
+  arquivo: tabela-precos-altis.md
+  formato_final: pdf
+  escopo: marca
+  acesso:
+    visibilidade: publico
+    marca: altis
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-01-31
+  responsavel: Altis do Brasil (montadora)
+- id: tabela-precos-veltra
+  titulo: Tabela de Preços Veltra
+  tipo: tabela-precos
+  arquivo: tabela-precos-veltra.md
+  formato_final: pdf
+  escopo: marca
+  acesso:
+    visibilidade: publico
+    marca: veltra
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-02-28
+  responsavel: Veltra Motors (montadora)
+- id: circular-altis-2026-01
+  titulo: Circular de Campanhas Altis CMP-0126
+  tipo: circular
+  arquivo: circular-altis-2026-01.md
+  formato_final: eml
+  escopo: marca
+  acesso:
+    visibilidade: publico
+    marca: altis
+  vigencia:
+    inicio: 2026-01-01
+    fim: 2026-01-31
+  responsavel: Altis do Brasil (montadora)
+- id: circular-veltra-2026-01
+  titulo: Circular de Campanhas Veltra VLT-0126
+  tipo: circular
+  arquivo: circular-veltra-2026-01.md
+  formato_final: eml
+  escopo: marca
+  acesso:
+    visibilidade: publico
+    marca: veltra
+  vigencia:
+    inicio: 2026-01-01
+    fim: 2026-01-31
+  responsavel: Veltra Motors (montadora)
+- id: matriz-cumulatividade
+  titulo: Matriz de Cumulatividade de Condições Comerciais
+  tipo: politica
+  arquivo: matriz-cumulatividade.md
+  formato_final: md
+  escopo: grupo
+  acesso:
+    visibilidade: vendedor
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-06-30
+  responsavel: Diretoria Comercial
+- id: seminovos-garantia
+  titulo: Política de Seminovos e Garantia
+  tipo: politica
+  arquivo: seminovos-garantia.md
+  formato_final: md
+  escopo: loja
+  acesso:
+    visibilidade: publico
+    loja: campinas
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Gerência de Seminovos
+- id: avaliacao-usados
+  titulo: Critérios de Avaliação de Veículos Usados
+  tipo: manual
+  arquivo: avaliacao-usados.md
+  formato_final: md
+  escopo: grupo
+  acesso:
+    visibilidade: vendedor
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Gerência de Seminovos
+- id: alcadas-desconto
+  titulo: Alçadas de Desconto e Margem Mínima
+  tipo: politica
+  arquivo: alcadas-desconto.md
+  formato_final: pdf
+  escopo: grupo
+  acesso:
+    visibilidade: gerente
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Diretoria Comercial
+- id: loja-recife
+  titulo: Horizonte Altis Recife
+  tipo: informacoes-loja
+  arquivo: loja-recife.md
+  formato_final: md
+  escopo: loja
+  acesso:
+    visibilidade: publico
+    marca: altis
+    loja: recife
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Gerência da loja
+- id: loja-sao-paulo
+  titulo: Horizonte Veltra São Paulo
+  tipo: informacoes-loja
+  arquivo: loja-sao-paulo.md
+  formato_final: md
+  escopo: loja
+  acesso:
+    visibilidade: publico
+    marca: veltra
+    loja: sao-paulo
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Gerência da loja
+- id: loja-campinas
+  titulo: Horizonte Seminovos Campinas
+  tipo: informacoes-loja
+  arquivo: loja-campinas.md
+  formato_final: md
+  escopo: loja
+  acesso:
+    visibilidade: publico
+    loja: campinas
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Gerência da loja
+- id: ata-reuniao-sao-paulo-2026-01-12
+  titulo: Ata da Reunião Comercial de 12/01/2026
+  tipo: ata
+  arquivo: ata-reuniao-sao-paulo-2026-01-12.md
+  formato_final: txt
+  escopo: loja
+  acesso:
+    visibilidade: vendedor
+    marca: veltra
+    loja: sao-paulo
+  vigencia:
+    inicio: 2026-01-12
+  responsavel: Gerência comercial da loja
+- id: glossario
+  titulo: Glossário de Termos Comerciais
+  tipo: glossario
+  arquivo: glossario.md
+  formato_final: md
+  escopo: grupo
+  acesso:
+    visibilidade: publico
+  vigencia:
+    inicio: 2026-01-01
+  revisar_ate: 2026-12-31
+  responsavel: Diretoria Comercial

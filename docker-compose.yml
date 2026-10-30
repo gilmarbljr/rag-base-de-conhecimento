@@ -1,0 +1,215 @@
+name: kb-rag
+
+volumes:
+  postgres_data:
+  ollama_data:
+  reranker_data:
+
+x-ollama: &service-ollama
+  image: ollama/ollama:latest
+  container_name: kb-ollama
+  restart: unless-stopped
+  ports:
+    - "${OLLAMA_PORT:-11434}:11434"
+  volumes:
+    - ollama_data:/root/.ollama
+
+x-ollama-init: &ollama-init
+  image: ollama/ollama:latest
+  volumes:
+    - ollama_data:/root/.ollama
+  environment:
+    - OLLAMA_HOST=kb-ollama:11434
+  entrypoint: /bin/sh
+  command:
+    - "-c"
+    # Modelo do índice inicial, modelo da troca demonstrada no mês 3 (ADR-006) e modelo de geração.
+    - "sleep 3; ollama pull ${KB_EMBEDDING_MODEL:-bge-m3} && ollama pull nomic-embed-text-v2-moe && ollama pull ${KB_GENERATION_MODEL:-qwen3:4b}"
+
+# Airflow: LocalExecutor, metadados num banco separado do mesmo Postgres (ver ADR-001).
+x-airflow: &airflow-common
+  build:
+    context: .
+    dockerfile: docker/airflow.Dockerfile
+  image: kb-airflow:local
+  profiles: ["airflow"]
+  environment:
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER:-kb}:${POSTGRES_PASSWORD:-kb}@postgres:5432/airflow
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-apiserver:8080/execution/
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET:-troque-este-segredo-local}
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+    # Ambiente local de demonstração: sem tela de login.
+    AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "true"
+    KB_HOME: /opt/kb
+    KB_DATABASE_URL: postgresql://${POSTGRES_USER:-kb}:${POSTGRES_PASSWORD:-kb}@postgres:5432/${POSTGRES_DB:-kb}
+    KB_OLLAMA_URL: http://kb-ollama:11434
+    KB_EMBEDDING_MODEL: ${KB_EMBEDDING_MODEL:-bge-m3}
+    KB_GENERATION_MODEL: ${KB_GENERATION_MODEL:-qwen3:4b}
+    KB_RERANKER_URL: http://kb-reranker:80
+    KB_PIPELINE: ${KB_PIPELINE:-hibrida-rerank}
+    KB_DATA_SIMULADA: ${KB_DATA_SIMULADA:-release}
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./data:/opt/kb/data
+    - ./configs:/opt/kb/configs
+    - ./reports:/opt/kb/reports
+    - ./src:/opt/kb/src
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: kb-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-kb}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-kb}
+      POSTGRES_DB: ${POSTGRES_DB:-kb}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-kb} -d ${POSTGRES_DB:-kb}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  ollama-cpu:
+    profiles: ["cpu"]
+    <<: *service-ollama
+
+  ollama-gpu:
+    profiles: ["gpu-nvidia"]
+    <<: *service-ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ollama-gpu-amd:
+    profiles: ["gpu-amd"]
+    <<: *service-ollama
+    image: ollama/ollama:rocm
+    devices:
+      - "/dev/kfd"
+      - "/dev/dri"
+
+  ollama-init-cpu:
+    profiles: ["cpu"]
+    <<: *ollama-init
+    depends_on:
+      - ollama-cpu
+
+  ollama-init-gpu:
+    profiles: ["gpu-nvidia"]
+    <<: *ollama-init
+    depends_on:
+      - ollama-gpu
+
+  ollama-init-gpu-amd:
+    profiles: ["gpu-amd"]
+    <<: *ollama-init
+    image: ollama/ollama:rocm
+    depends_on:
+      - ollama-gpu-amd
+
+  # Reranker (cross-encoder) servido pelo Text Embeddings Inference. Imagem de CPU em todos
+  # os profiles; o modelo é baixado no primeiro start e fica no volume. O modelo precisa ser
+  # o mesmo declarado na pipeline (configs/pipelines/hibrida-rerank.yaml).
+  reranker:
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.9
+    container_name: kb-reranker
+    profiles: ["cpu", "gpu-nvidia", "gpu-amd"]
+    restart: unless-stopped
+    command: ["--model-id", "${KB_RERANKER_MODEL:-cross-encoder/mmarco-mMiniLMv2-L12-H384-v1}"]
+    ports:
+      - "${RERANKER_PORT:-8081}:80"
+    volumes:
+      - reranker_data:/data
+
+  # Painel de administração (Streamlit).
+  admin:
+    build:
+      context: .
+      dockerfile: docker/admin.Dockerfile
+    image: kb-admin:local
+    container_name: kb-admin
+    profiles: ["admin"]
+    restart: unless-stopped
+    environment:
+      KB_DATABASE_URL: postgresql://${POSTGRES_USER:-kb}:${POSTGRES_PASSWORD:-kb}@postgres:5432/${POSTGRES_DB:-kb}
+      KB_OLLAMA_URL: http://kb-ollama:11434
+      KB_EMBEDDING_MODEL: ${KB_EMBEDDING_MODEL:-bge-m3}
+      KB_RERANKER_URL: http://kb-reranker:80
+      KB_PIPELINE: ${KB_PIPELINE:-hibrida-rerank}
+      KB_DATA_SIMULADA: ${KB_DATA_SIMULADA:-release}
+    ports:
+      - "${ADMIN_PORT:-8501}:8501"
+    volumes:
+      - ./admin:/opt/kb/admin
+      - ./src:/opt/kb/src
+      - ./data:/opt/kb/data
+      - ./configs:/opt/kb/configs
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Cria o banco de metadados do Airflow, se ainda não existir.
+  airflow-db-init:
+    image: pgvector/pgvector:pg17
+    profiles: ["airflow"]
+    environment:
+      PGHOST: postgres
+      PGUSER: ${POSTGRES_USER:-kb}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-kb}
+      PGDATABASE: ${POSTGRES_DB:-kb}
+    entrypoint: /bin/sh
+    command:
+      - "-c"
+      - "psql -tAc \"SELECT 1 FROM pg_database WHERE datname = 'airflow'\" | grep -q 1 || psql -c 'CREATE DATABASE airflow'"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  airflow-init:
+    <<: *airflow-common
+    command: db migrate
+    depends_on:
+      airflow-db-init:
+        condition: service_completed_successfully
+
+  airflow-apiserver:
+    <<: *airflow-common
+    command: api-server
+    restart: unless-stopped
+    ports:
+      - "${AIRFLOW_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/version"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: unless-stopped
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-dag-processor:
+    <<: *airflow-common
+    command: dag-processor
+    restart: unless-stopped
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully

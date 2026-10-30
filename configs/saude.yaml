@@ -1,0 +1,25 @@
+# Limiares do relatório de saúde da base.
+
+# Documentos com revisão marcada para os próximos N dias aparecem como "a vencer".
+vencimento_alerta_dias: 15
+
+# Similaridade de cosseno a partir da qual dois trechos de documentos diferentes são
+# considerados quase idênticos.
+duplicata_similaridade: 0.97
+
+conflitos:
+  # Termos em comum (fora stopwords) para duas regras de polaridade oposta virarem candidatas.
+  termos_comuns: 3
+  # Confirma cada candidato com o modelo de geração (KB_GENERATION_MODEL).
+  usar_juiz: true
+
+# Trechos menores que isto quase nunca respondem sozinhos a uma pergunta.
+chunk_minimo_caracteres: 120
+
+lacunas:
+  # As lacunas são medidas na escala de score de uma pipeline específica.
+  pipeline: hibrida-rerank
+  # Score do 1º trecho abaixo do qual a pergunta é considerada sem boa resposta.
+  score_maximo: 0.2
+  # Janela, em dias, do log de consultas.
+  dias: 30

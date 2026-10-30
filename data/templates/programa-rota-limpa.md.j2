@@ -1,0 +1,32 @@
+# {{ rota_limpa.nome }}
+
+O {{ rota_limpa.nome }} é um programa governamental de incentivo à renovação da frota com veículos de menor emissão. As concessionárias do {{ grupo.nome }} participam do programa nas condições abaixo.
+
+## Vigência e verba
+
+O programa vale de {{ rota_limpa.inicio | data }} a {{ rota_limpa.fim | data }} ou até o fim da verba nacional do programa, o que ocorrer primeiro. A disponibilidade de verba é confirmada no sistema da montadora no momento do pedido.
+
+## Benefício
+
+Bônus de {{ rota_limpa.bonus | brl }} abatido do preço público do veículo novo, conforme a tabela de preços vigente da montadora.
+
+## Modelos participantes
+
+| Código | Versão |
+|---|---|
+{% for marca in marcas.values() %}
+{% for v in marca.versoes if v.codigo in rota_limpa.modelos %}
+| {{ v.codigo }} | {{ marca.nome }} {{ v.descricao }} |
+{% endfor %}
+{% endfor %}
+
+## Requisitos
+
+- Comprador pessoa física.
+- Entregar um veículo próprio com {{ rota_limpa.idade_minima_veiculo_anos }} anos ou mais de fabricação para reciclagem certificada.
+- O veículo entregue deve estar quitado, sem restrições e com a documentação em dia.
+- Um benefício por CPF durante a vigência do programa.
+
+## Combinação com outras condições
+
+O bônus do programa pode ser somado à campanha do mês da montadora. Não pode ser combinado com bônus de troca, porque o veículo antigo vai para reciclagem e não para troca, nem com desconto PCD ou venda direta.

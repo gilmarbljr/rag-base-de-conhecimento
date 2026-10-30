@@ -1,0 +1,39 @@
+# {{ doc.titulo }}
+
+Regras de qualidade e garantia dos seminovos vendidos pela {{ lojas.campinas.nome }}.
+
+## Padrão de qualidade
+
+- Inspeção de {{ seminovos.itens_inspecao }} itens antes da venda.
+- Laudo cautelar aprovado para todos os veículos.
+- Histórico de manutenção apresentado ao cliente quando disponível.
+
+## Garantia
+
+Todos os seminovos têm garantia de motor e câmbio, conforme a idade e a quilometragem do veículo na data da venda:
+
+| Idade do veículo | Quilometragem | Garantia de motor e câmbio |
+|---|---|---|
+{% for g in seminovos.garantia %}
+| {{ g.idade }} | {{ g.km }} | {{ g.meses }} meses |
+{% endfor %}
+
+Quando a idade e a quilometragem caem em faixas diferentes, vale a faixa de menor garantia.
+
+## O que a garantia não cobre
+
+- Itens de desgaste natural: pneus, freios, embreagem, palhetas, lâmpadas e bateria.
+- Danos causados por mau uso, acidentes ou alterações no veículo.
+- Manutenções preventivas.
+
+## Satisfação garantida
+
+Se o cliente não ficar satisfeito, pode trocar o veículo por outro do estoque em até {{ seminovos.satisfacao_dias }} dias ou {{ seminovos.satisfacao_km }} km da entrega, o que ocorrer primeiro, pagando apenas a eventual diferença de valor.
+
+## Financiamento
+
+Entrada mínima de {{ seminovos.entrada_minima_pct | pct }} e prazo de até {{ seminovos.prazo_maximo_meses }} meses, sujeito à aprovação de crédito.
+
+## Transferência
+
+A transferência de propriedade é feita pela loja, sem custo para o cliente.

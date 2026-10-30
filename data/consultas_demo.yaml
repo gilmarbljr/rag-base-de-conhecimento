@@ -1,0 +1,26 @@
+# Perguntas de demonstração, como se viessem de clientes e vendedores.
+# Rodadas por `kb simular-consultas data/consultas_demo.yaml`, alimentam o log de consultas.
+# Algumas não têm resposta na base (e se repetem): são as lacunas que o relatório de saúde
+# deve apontar como conteúdo a criar.
+consultas:
+  # Têm resposta na base
+  - {perfil: cliente-recife, pergunta: "Qual o preço do Altis Nexa 1.0 Turbo?"}
+  - {perfil: cliente-recife, pergunta: "Quais documentos preciso para comprar um carro PCD?"}
+  - {perfil: cliente-recife, pergunta: "Qual o horário da loja no sábado?"}
+  - {perfil: cliente-recife, pergunta: "Como funciona o sinal de reserva do carro?"}
+  - {perfil: cliente-recife, pergunta: "Qual o prazo de entrega de um carro em estoque?"}
+  - {perfil: vendedor-sao-paulo, pergunta: "Qual o desconto de venda direta do Sport 1.5 Turbo?"}
+  - {perfil: vendedor-sao-paulo, pergunta: "Quanto vale na troca um carro de 7 anos?"}
+  - {perfil: vendedor-sao-paulo, pergunta: "Cliente PJ pode somar campanha com venda direta?"}
+  - {perfil: gerente-campinas, pergunta: "Qual a garantia de um seminovo com 4 anos?"}
+  - {perfil: gerente-campinas, pergunta: "Qual a margem mínima para seminovos?"}
+
+  # Lacunas: a base não tem a resposta
+  - {perfil: cliente-recife, pergunta: "Vocês vendem motos?"}
+  - {perfil: cliente-recife, pergunta: "Vocês vendem motos?"}
+  - {perfil: cliente-recife, pergunta: "O Vento Híbrido vem com carregador para casa?"}
+  - {perfil: vendedor-sao-paulo, pergunta: "O Vento Híbrido vem com carregador para casa?"}
+  - {perfil: vendedor-sao-paulo, pergunta: "O Vento Híbrido vem com carregador para casa?"}
+  - {perfil: cliente-recife, pergunta: "Qual o valor do seguro do Nexa?"}
+  - {perfil: cliente-recife, pergunta: "Qual o valor do seguro do Nexa?"}
+  - {perfil: cliente-recife, pergunta: "Vocês fazem consórcio?"}

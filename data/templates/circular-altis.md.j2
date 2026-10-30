@@ -1,0 +1,46 @@
+{% set c = campanha %}
+{% set ns = namespace(item=0) %}
+# {{ doc.titulo }}
+
+{% if encaminhada_por is defined %}
+Mensagem encaminhada por: {{ encaminhada_por }}. Segue a circular recebida da montadora, para conhecimento da equipe.
+
+{% endif %}
+De: Diretoria Comercial, Altis do Brasil
+Para: Rede de concessionárias Altis
+Assunto: Campanhas de {{ c.mes }} ({{ c.codigo }})
+
+Prezados concessionários,
+
+Seguem as condições comerciais da campanha {{ c.codigo }}, válidas para pedidos assinados de {{ c.inicio | data }} a {{ c.fim | data }} e faturados até {{ c.faturamento_ate | data }}.
+
+{% if c.taxa_zero is defined %}
+{% set ns.item = ns.item + 1 %}
+**{{ ns.item }}. Taxa Zero.** Financiamento com taxa de 0% ao mês em até {{ c.taxa_zero.parcelas }} parcelas, com entrada mínima de {{ c.taxa_zero.entrada_minima_pct | pct }} do valor do veículo, para as versões:
+
+{% for v in marcas.altis.versoes if v.codigo in c.taxa_zero.versoes %}
+- {{ v.codigo }}: Altis {{ v.descricao }}
+{% endfor %}
+
+A Taxa Zero está sujeita à aprovação de crédito pelo banco da montadora e não vale para as demais versões.
+
+{% endif %}
+{% if c.desconto_a_vista is defined %}
+{% set ns.item = ns.item + 1 %}
+{% for v in marcas.altis.versoes if v.codigo == c.desconto_a_vista.versao %}
+**{{ ns.item }}. Desconto à vista.** Desconto de {{ c.desconto_a_vista.valor | brl }} na compra à vista do Altis {{ v.descricao }} ({{ v.codigo }}).
+{% endfor %}
+
+{% endif %}
+{% if c.bonus_troca is defined %}
+{% set ns.item = ns.item + 1 %}
+**{{ ns.item }}. Bônus de troca.** Bônus de {{ c.bonus_troca.valor | brl }} na compra de qualquer versão do Altis {{ c.bonus_troca.modelo }} com um veículo usado na troca, de qualquer marca. O bônus é somado ao valor de avaliação do usado.
+{% if c.bonus_troca.nao_acumula_com is defined %}
+Atenção: nesta campanha, o bônus de troca do Altis {{ c.bonus_troca.modelo }} não acumula com {{ c.bonus_troca.nao_acumula_com }}.
+{% endif %}
+
+{% endif %}
+**Regras gerais.** As condições valem enquanto durar o estoque da rede e não acumulam com venda direta. Pedidos assinados depois de {{ c.fim | data }} não têm direito às condições desta circular.
+
+Atenciosamente,
+Diretoria Comercial, Altis do Brasil

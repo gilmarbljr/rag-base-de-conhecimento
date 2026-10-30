@@ -1,0 +1,324 @@
+[
+  {
+    "estrategia": "Tamanho fixo (500, sobreposição 75)",
+    "index_config_id": "fixo-bge-m3-237b58",
+    "trechos_vigentes": 58,
+    "tamanho_mediano": 500,
+    "trechos_pequenos": 3,
+    "embeddings_totais": 77,
+    "avaliacao": {
+      "hibrida": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.8959,
+        "mrr": 0.9375,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 177.6,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      },
+      "hibrida-rerank": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.9375,
+        "mrr": 0.9688,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 2075.8,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "rotatividade": {
+      "release_2": {
+        "novos": 8,
+        "total": 69
+      },
+      "release_3": {
+        "novos": 3,
+        "total": 69
+      }
+    }
+  },
+  {
+    "estrategia": "Recursivo (1.800)",
+    "index_config_id": "recursivo-bge-m3-e7c4d3",
+    "trechos_vigentes": 20,
+    "tamanho_mediano": 1237,
+    "trechos_pequenos": 1,
+    "embeddings_totais": 27,
+    "avaliacao": {
+      "hibrida": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.8125,
+        "mrr": 0.8802,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 169.8,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      },
+      "hibrida-rerank": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.8542,
+        "mrr": 0.9045,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 3533.1,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "rotatividade": {
+      "release_2": {
+        "novos": 3,
+        "total": 24
+      },
+      "release_3": {
+        "novos": 1,
+        "total": 24
+      }
+    }
+  },
+  {
+    "estrategia": "Semântico (percentil 85, máx. 1.800)",
+    "index_config_id": "semantico-bge-m3-35fac2",
+    "trechos_vigentes": 81,
+    "tamanho_mediano": 195,
+    "trechos_pequenos": 29,
+    "embeddings_totais": 104,
+    "avaliacao": {
+      "hibrida": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.875,
+        "mrr": 0.9375,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 176.6,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      },
+      "hibrida-rerank": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.8958,
+        "mrr": 0.9479,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 2283.8,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "rotatividade": {
+      "release_2": {
+        "novos": 7,
+        "total": 97
+      },
+      "release_3": {
+        "novos": 4,
+        "total": 96
+      }
+    }
+  },
+  {
+    "estrategia": "Hierárquico (1.800)",
+    "index_config_id": "hierarquico-bge-m3-e7c4d3",
+    "trechos_vigentes": 80,
+    "tamanho_mediano": 176,
+    "trechos_pequenos": 26,
+    "embeddings_totais": 93,
+    "avaliacao": {
+      "hibrida": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.7708,
+        "mrr": 0.8819,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 171.7,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      },
+      "hibrida-rerank": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.9167,
+        "mrr": 0.9584,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 2923.7,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "rotatividade": {
+      "release_2": {
+        "novos": 4,
+        "total": 89
+      },
+      "release_3": {
+        "novos": 1,
+        "total": 84
+      }
+    }
+  },
+  {
+    "estrategia": "Hierárquico + fusão de fragmentos (mín. 200)",
+    "index_config_id": "hierarquico-bge-m3-d658cc",
+    "trechos_vigentes": 79,
+    "tamanho_mediano": 177,
+    "trechos_pequenos": 25,
+    "embeddings_totais": 92,
+    "avaliacao": {
+      "hibrida": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.7292,
+        "mrr": 0.8611,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 185.0,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      },
+      "hibrida-rerank": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.9167,
+        "mrr": 0.9584,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 3117.1,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "rotatividade": {
+      "release_2": {
+        "novos": 4,
+        "total": 88
+      },
+      "release_3": {
+        "novos": 1,
+        "total": 83
+      }
+    }
+  },
+  {
+    "estrategia": "Hierárquico + agrupamento de seções (até 600)",
+    "index_config_id": "hierarquico-bge-m3-1213e7",
+    "trechos_vigentes": 45,
+    "tamanho_mediano": 481,
+    "trechos_pequenos": 3,
+    "embeddings_totais": 55,
+    "avaliacao": {
+      "hibrida": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.6875,
+        "mrr": 0.8333,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 179.4,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      },
+      "hibrida-rerank": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.9167,
+        "mrr": 0.9584,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 3268.9,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "rotatividade": {
+      "release_2": {
+        "novos": 4,
+        "total": 51
+      },
+      "release_3": {
+        "novos": 1,
+        "total": 49
+      }
+    }
+  },
+  {
+    "estrategia": "Hierárquico + agrupamento de seções (até 1.200)",
+    "index_config_id": "hierarquico-bge-m3-7b09b2",
+    "trechos_vigentes": 26,
+    "tamanho_mediano": 884,
+    "trechos_pequenos": 1,
+    "embeddings_totais": 35,
+    "avaliacao": {
+      "hibrida": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.7917,
+        "mrr": 0.8559,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 181.8,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      },
+      "hibrida-rerank": {
+        "perguntas_avaliadas": 48,
+        "recall@1": 0.875,
+        "mrr": 0.9305,
+        "vazamentos": 0,
+        "proibidos": 0,
+        "latencia_media_ms": 4056.9,
+        "releases": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "rotatividade": {
+      "release_2": {
+        "novos": 4,
+        "total": 31
+      },
+      "release_3": {
+        "novos": 1,
+        "total": 30
+      }
+    }
+  }
+]

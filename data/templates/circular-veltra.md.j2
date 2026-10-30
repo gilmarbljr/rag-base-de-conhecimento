@@ -1,0 +1,23 @@
+{% set c = campanha %}
+# {{ doc.titulo }}
+
+De: Gerência de Vendas, Veltra Motors
+Para: Concessionárias Veltra
+Assunto: Ofertas de {{ c.mes }} ({{ c.codigo }})
+
+Prezada rede,
+
+As ofertas abaixo valem para pedidos assinados de {{ c.inicio | data }} a {{ c.fim | data }}.
+
+{% for v in marcas.veltra.versoes if v.codigo == c.ipva_pago.versao %}
+**IPVA 2026 pago.** Na compra do Veltra {{ v.descricao }} ({{ v.codigo }}), o IPVA 2026 é pago pela concessionária.
+{% endfor %}
+
+**Bônus de troca.** Bônus de {{ c.bonus_troca.valor | brl }} na compra do Veltra {{ c.bonus_troca.modelo }} com um veículo usado na troca. O bônus é somado ao valor de avaliação do usado.
+
+**Revisões inclusas.** Na compra de qualquer versão do Veltra {{ c.revisoes_inclusas.modelo }}, as revisões de {{ c.revisoes_inclusas.revisoes }} estão inclusas no preço.
+
+As ofertas não acumulam com venda direta e valem enquanto durar o estoque.
+
+Atenciosamente,
+Gerência de Vendas, Veltra Motors

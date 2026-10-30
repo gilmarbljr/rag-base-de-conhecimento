@@ -1,0 +1,46 @@
+{% set exemplo_ref = 60000 %}
+{% set exemplo_pct = avaliacao.percentuais[1].pct %}
+{% set exemplo_km = 90000 %}
+{% set exemplo_anos = 5 %}
+{% set excedente = exemplo_km - exemplo_anos * avaliacao.km_referencia_ano %}
+{% set desconto_km = excedente // 5000 %}
+{% set valor_idade = exemplo_ref * exemplo_pct / 100 %}
+# {{ doc.titulo }}
+
+Uso interno. Critérios para avaliar veículos recebidos na troca em todas as lojas do {{ grupo.nome }}.
+
+## Valor de referência
+
+O ponto de partida é o valor de referência de mercado do veículo, pela tabela de referência adotada pelo grupo. Sobre ele é aplicado um percentual conforme a idade:
+
+| Idade do veículo | Percentual sobre a referência |
+|---|---|
+{% for p in avaliacao.percentuais %}
+| {{ p.idade }} | {{ p.pct | pct }} |
+{% endfor %}
+| Acima de 10 anos | Avaliação caso a caso pelo gerente de seminovos |
+
+## Ajustes
+
+- Quilometragem acima de {{ avaliacao.km_referencia_ano | num }} km por ano de uso: desconto de 1% sobre o valor avaliado a cada 5.000 km excedentes.
+- Reparos necessários identificados na vistoria são descontados pelo custo estimado.
+- Pneus abaixo do indicador de desgaste: desconto de R$ 1.200,00 pelo jogo.
+
+Exemplo: veículo com {{ exemplo_anos }} anos, referência de {{ exemplo_ref | brl }} e {{ exemplo_km | num }} km. O percentual por idade é {{ exemplo_pct | pct }}, o que resulta em {{ valor_idade | brl }}. Há {{ excedente | num }} km excedentes, que geram desconto de {{ desconto_km | pct }}. Valor final: {{ (valor_idade * (100 - desconto_km) / 100) | brl }}.
+
+## Reprovação automática
+
+O veículo não é aceito na troca quando:
+
+- o laudo cautelar é reprovado;
+- há registro de sinistro de média ou grande monta;
+- o chassi ou o motor apresentam remarcação;
+- existe restrição judicial ou administrativa.
+
+## Validade da avaliação
+
+A avaliação vale por {{ avaliacao.validade_dias }} dias corridos. Depois disso, o veículo precisa ser vistoriado novamente.
+
+## Bônus de troca
+
+Os bônus de troca de campanhas são concedidos pela montadora e somados ao valor da avaliação. Eles não alteram os critérios desta política.
